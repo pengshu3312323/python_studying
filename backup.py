@@ -1,14 +1,14 @@
+#!/usr/bin/env python3
+# coding=UTF-8
+
 import os
 import time
 import sys
 
-'''
-backup files in a zip 
-on directories named by date
-'''
+'''backup files in a zip on directories named by date'''
 
-target_up=str(sys.argv[2])
 source=str(sys.argv[1])
+target_up=str(sys.argv[2])
 
 comment=input('Enter a comment -->')
 
