@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<!---Edit the infomation of the blog--->
+
+{% block content %}
+  <a href={% url "blog:about" %}>About</a>
+  
+  <form action="{% url "blog:blog_info_edit" %}" method='POST'>
+	{% csrf_token %}
+	{{form.as_p}}
+	<button name="submit">Save</button>
+  </form>	
+{% endblock %}

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #my app:
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -75,12 +77,8 @@ WSGI_APPLICATION = 'meetpencil.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'meetpencil',
-        'USER':'pencil',
-        'PASSWORD':'hummel165',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':os.path.join(BASE_DIR,'db.sqlite3'),
     }
 }
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends "blog/base.html" %}
+
+{% block content %}
+<h1>Posts</h1>
+<a href = {% url "blog:create_post" %}>New post</a>
+<hr>
+  <ul>
+	  {% for post in posts %}
+	  	<h2>{{post.title|title}}</h2>
+		<p>{{post.body}}</p>
+		<p>{{post.time_added}}</p>
+		<hr>
+	  {% empty %}
+	    <li>No post written yet.</li>
+	  {% endfor %}
+  </ul>
+{% endblock %}
