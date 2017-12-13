@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--Homepage of guide-->
+
+<html>
+  <head>
+	</head>
+	<body>
+{% extends "blog/base.html" %}
+{% block content %}
+		<a href = {% url "blog:index" %}>Blog</a>			
+	  <h3>Test</h3>
+		<li>
+		  {% for favor in favorite %}
+				<a href ="{{favor.address}}">{{favor.name|title}}</a>
+				<hr>
+				{% empty %}
+				  <p>No favorite site yet</p>
+		  {% endfor %}
+		</li>
+		<a href= {% url "guide:edit" %}>Edit</a>
+{% endblock %}
+  </body>
+</html>

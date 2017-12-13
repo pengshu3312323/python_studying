@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>		
+<meta charset="utf-8">
+<meta name="author",content="Pencil">
+<title>Favorite_site_edit</title>
+</head>
+
+<body>
+{% extends "blog/base.html" %}
+
+{% block content %}
+  <h5>My Sites</h5>
+	<li>
+	{% for favorite in favorites %}
+		{{favorite.name|title}}
+		{% empty %}
+		  <p>No favorite site yet</p>
+  </li>
+	{% endfor %}
+{% endblock %}
+</body>
+
+</html>

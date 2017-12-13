@@ -1,15 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,get_list_or_404
 from blog.models import Blog_post,Information,Post_form,Blog_info_form
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 
 def index(request):
-    '''Homepage of MeetPencil'''
+    '''Homepage of the blog'''
     return render(request,'blog/index.html')
 
 def post(request):
     '''Post of blog'''
-    posts=Blog_post.objects.order_by('-time_added')
+#    posts=Blog_post.objects.order_by('-time_added')
+    posts=get_list_or_404(Blog_post)
     context={'posts':posts}
     return render(request,'blog/post.html',context)
 
@@ -34,10 +35,11 @@ def create_post(request):
 
 def blog_info_edit(request):
     '''Edit the information of the blog'''
+    info=Information.objects.get()
     if request.method!='POST':
-        form=Blog_info_form()
+        form=Blog_info_form(instance=info)
     elif request.method=='POST':
-        form=Blog_info_form(request.POST)
+        form=Blog_info_form(instance=info,data=request.POST)
         if form.is_valid():
             form.save()
         return HttpResponseRedirect(reverse('blog:about'))
@@ -45,3 +47,9 @@ def blog_info_edit(request):
     context={'form':form}
     return render(request,'blog/blog_info_edit.html',context)
 
+def post_detail(request,post_id):
+    '''Single post'''
+    post=get_object_or_404(Blog_post,pk=post_id)
+    context={'post':post}
+    return render(request,'blog/post_detail.html',context)
+    

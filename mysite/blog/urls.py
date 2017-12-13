@@ -4,6 +4,7 @@ from django.urls import path,include
 from . import views
 
 app_name = 'blog'
+
 urlpatterns=[
         #page of blog
         path('',views.index,name='index'),
@@ -15,5 +16,7 @@ urlpatterns=[
         path('post/create/',views.create_post,name='create_post'),
         #Edit the information of the blog
         path('post/about/edit',views.blog_info_edit,name='blog_info_edit'),
+        #One post of the blog
+        path('post/<int:post_id>',views.post_detail,name='post_detail'),
         ]
 
