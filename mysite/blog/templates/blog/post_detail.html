@@ -2,17 +2,18 @@
 <!--Single post template-->
 
 <html>
-  <head>
-		<meta charset="utf-8">
-  </head>
+<head>
+<meta charset="utf-8">
+</head>
   
-	<body>
+<body>
 {% extends "blog/base.html" %}
 
 {% block content %}			
-		<h2>{{post.title|title}}</h2>		
-		{{post.time_added}}
-		<p>{{post.body}}</p>
+  <h2>{{post.title|title}}</h2>		
+  {{post.time_added}}
+  <p>{{post.body}}</p>
+<a href = "{% url 'blog:post_edit' post.id %}">Edit</a>
 {% endblock %}
-  </body>
+</body>
 </html>

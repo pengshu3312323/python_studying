@@ -6,14 +6,13 @@ from django.urls import reverse
 def index(request):
     '''Homepage of the blog'''
     return render(request,'blog/index.html')
-
+'''
 def post(request):
-    '''Post of blog'''
-#    posts=Blog_post.objects.order_by('-time_added')
-    posts=get_list_or_404(Blog_post)
+    Post of blog
+    posts=Blog_post.objects.order_by('-time_added')
     context={'posts':posts}
     return render(request,'blog/post.html',context)
-
+'''
 def about(request):
     '''information of blog'''
     info=Information.objects.get()
@@ -52,4 +51,22 @@ def post_detail(request,post_id):
     post=get_object_or_404(Blog_post,pk=post_id)
     context={'post':post}
     return render(request,'blog/post_detail.html',context)
-    
+
+def post_edit(request,post_id):
+    '''Edit each post'''
+    post=get_object_or_404(Blog_post,pk=post_id)
+    if request.method!='POST':
+        form=Post_form(instance=post)
+    elif request.method=='POST':
+        form=Post_form(instance=post,data=request.POST)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('blog:post'))
+
+    context={
+        'post':post,
+        'form':form,
+        }
+    return render(request,'blog/post_edit.html',context)
+
+

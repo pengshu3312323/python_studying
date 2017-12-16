@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<!---Edit the infomation of the blog--->
+<html>
+<head>		
+<!--Edit the infomation of the blog-->
+<meta charset="utf-8">
+<title>Blog information edit</title>
+</head>
+<body>
 
 {% block content %}
   <a href={% url "blog:about" %}>About</a>
@@ -10,3 +16,6 @@
 	<button name="submit">Save</button>
   </form>	
 {% endblock %}
+
+</body>
+</html>

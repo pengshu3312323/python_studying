@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!--Add a new favorite site--!>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Pencil">
+<title>Add_new_site</title>
+</head>
+<body>
+  {% extends "blog/base.html" %}
+
+  {% block content %}
+  <form action="guide:add" method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="SAVE">
+  </form>
+  {% endblock %}
+</body>
+</html>
