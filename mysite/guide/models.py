@@ -4,7 +4,7 @@ from django.forms import ModelForm
 class Favorite(models.Model):
     '''User's favorite web'''
     name=models.CharField(max_length=50)
-    address=models.CharField(max_length=100)
+    address=models.URLField()
     time_added=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

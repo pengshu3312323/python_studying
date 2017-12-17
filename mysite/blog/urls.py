@@ -25,6 +25,7 @@ urlpatterns=[
             'about/',
             DetailView.as_view(
                 model='Blog_post',
+                context_object_name='post',
                 template_name='blog/post_detail.html'
                 ),
             name='about'

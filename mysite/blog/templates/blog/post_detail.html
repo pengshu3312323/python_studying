@@ -1,19 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
-<!--Single post template-->
+<!--Page for a single post-->
 
 <html>
-<head>
-<meta charset="utf-8">
-</head>
-  
-<body>
-{% extends "blog/base.html" %}
-
-{% block content %}			
-  <h2>{{post.title|title}}</h2>		
-  {{post.time_added}}
-  <p>{{post.body}}</p>
-<a href = "{% url 'blog:post_edit' post.id %}">Edit</a>
-{% endblock %}
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Pencil">
+    <title>Post_page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}" >
+  </head>
+    
+  <body>
+    <a href = "{% url 'guide:index' %}">Home</a>   
+    {% block content %}			
+      <h2>{{post.title|title}}</h2>		
+      {{post.time_added}}
+      <p>{{post.body}}</p>
+      <a href = "{% url 'blog:post_edit' post.id %}">Edit</a>
+    {% endblock %}
+  </body>
 </html>
