@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,get_list_or_404
 from blog.models import Blog_post,Information,Post_form,Blog_info_form
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     '''Homepage of the blog'''
@@ -19,6 +20,7 @@ def about(request):
     context={'info':info}
     return render(request,'blog/about.html',context)
 
+@login_required
 def create_post(request):
     '''create a new post'''
     if request.method!='POST':
@@ -32,6 +34,7 @@ def create_post(request):
     context={'form':form}
     return render(request,'blog/createpost.html',context)
 
+@login_required
 def blog_info_edit(request):
     '''Edit the information of the blog'''
     info=Information.objects.get()
@@ -69,4 +72,8 @@ def post_edit(request,post_id):
         }
     return render(request,'blog/post_edit.html',context)
 
-
+def post_delete(request,post_id):
+    '''Delete a post'''
+    post=get_object_or_404(Blog_post,pk=post_id)
+    post.delete()
+    return HttpResponseRedirect(reverse('blog:post'))

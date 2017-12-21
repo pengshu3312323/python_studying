@@ -1,7 +1,7 @@
 '''blog's URLConfig'''
 
 from django.urls import path,include
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView,DetailView,DeleteView
 from . import views
 from .models import Blog_post
 
@@ -32,6 +32,8 @@ urlpatterns=[
             ),
         #create a post
         path('post/create/',views.create_post,name='create_post'),
+        #delete a post       
+        path('post/<int:post_id>/delete/',views.post_delete,name='post_delete'),
         #Edit the information of the blog
         path('post/about/edit',views.blog_info_edit,name='blog_info_edit'),
         #One post of the blog

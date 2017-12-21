@@ -7,8 +7,9 @@
 	<body>
 {% extends "blog/base.html" %}
 {% block content %}
+		<br>
 		<a href = {% url "blog:index" %}>Blog</a>			
-	  <h3>Test</h3>
+	  <h1>Test</h1>
 		<li>
 		  {% for favor in favorite %}
 				<a href ="{{favor.address}}">{{favor.name|title}}</a>
