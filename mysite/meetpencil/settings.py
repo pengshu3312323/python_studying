@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -79,8 +80,12 @@ WSGI_APPLICATION = 'meetpencil.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':os.path.join(BASE_DIR,'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'meetpencil',
+        'USER':'root',
+        'PASSWORD':'hummel165',
+        'HOST':'',
+        'PORT':'',
     }
 }
 
@@ -127,4 +132,8 @@ STATICFILES_FINDERS = [
         'django.contrib.staticfiles.finders.FileSystemFinder',
         'django.contrib.staticfiles.finders.AppDirectoriesFinder',
         ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+
 

@@ -7,12 +7,7 @@ class Favorite(models.Model):
     name=models.CharField(max_length=50)
     address=models.URLField()
     time_added=models.DateTimeField(auto_now_add=True)
-    owner=models.OneToOneField(
-            User,
-            on_delete=models.CASCADE,
-            verbose_name="Owner of the favorite site",
-            default='pencil'
-            )
+    owner=models.ForeignKey(User,on_delete=models.CASCADE,)
 
     def __str__(self):
         return self.name

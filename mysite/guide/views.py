@@ -22,7 +22,9 @@ def add(request):
     elif request.method=='POST':
         form=Favorite_form(request.POST)
         if form.is_valid():
-            form.save()
+            new_site=form.save(commit=False)
+            new_site.owner=request.user
+            new_site.save()
         return HttpResponseRedirect(reverse('guide:edit'))
 
     context={'form':form}
