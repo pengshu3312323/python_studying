@@ -1,31 +1,25 @@
-{% load static %}
+{% extends "blog/base.html" %}
 
-<!DOCTYPE html>
+{% block header %}
+  <title>Blog Post</title>	
+{% endblock header %}
 
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="author",content="pencil">
-  <title>Post of the blog</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}" >
-</head>
+{% block content %}
 
-<body>
-  <a href = "{% url 'guide:index' %}">Home</a>
-  {% block content %}
-    <h1>Posts</h1>
-    <a href = {% url "blog:create_post" %}>New post</a>
-    <hr>
-    <li>
-      {% for post in posts %}
-        <a href={% url "blog:post_detail" post.id %}>{{post.title|title}}</a>
-        <p>{{post.body}}</p>
-        <p>{{post.time_added}}</p>
-        <hr>
-      {% empty %}
-        <li>No post written yet.</li>
-      {% endfor %}
-    </li>
-  {% endblock %}
-</body>
-</html>
+  <div class="jumbotron">
+    <h1>Meet Pencil</h1>
+  </div>
+
+  <a href = {% url "blog:create_post" %}>New post</a>
+  <hr>
+  <li>
+    {% for post in posts %}
+      <a href={% url "blog:post_detail" post.id %}>{{post.title|title}}</a>
+      <p>{{post.body}}</p>
+      <p>{{post.time_added}}</p>
+      <hr>
+    {% empty %}
+      <li>No post written yet.</li>
+    {% endfor %}
+  </li>
+{% endblock content %}

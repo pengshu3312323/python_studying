@@ -1,24 +1,23 @@
-{% load static %}
-<!DOCTYPE html>
-<!--Page for a single post-->
+{% extends "blog/base.html" %}
 
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="author" content="Pencil">
-    <title>Post_page</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/style.css' %}" >
-  </head>
-    
-  <body>
-    <a href = "{% url 'guide:index' %}">Home</a>   
-    {% block content %}			
-      <h2>{{post.title|title}}</h2>		
-      {{post.time_added}}
-      <p>{{post.body}}</p>
-      <img src="{{ post.image.url }}">
-      <a href="{% url 'blog:post_edit' post.id %}">Edit</a>
-      <a href="{% url 'blog:post_delete' post.id %}">Delete</a>
-    {% endblock %}
-  </body>
-</html>
+{% block header %}
+  <title>{{post.title}}</title>
+{% endblock header %}
+
+{% block content %}			
+  <h2>{{post.title|title}}</h2>		
+  {{post.time_added}}
+  <p>{{post.body}}</p>
+
+  {% if images is not None %}
+    {% for image in images %}
+      <img class="img-fluid" src="{{ image.image.url }}">
+    {% endfor %}
+  {% else %}
+    <p>No pictures</p>
+  {% endif %}
+
+  <a href="{% url 'blog:post_edit' post.id %}">Edit</a>
+  <a href="{% url 'blog:post_delete' post.id %}">Delete</a>
+{% endblock %}
+

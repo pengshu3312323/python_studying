@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+
+{% block header %}
+    <title>Login or register</title>
+{% endblock header %}
+
+{% block content %}
+    <div>
+        <a href="{% url 'users:login' %}">Log in and add your favorite sites</a>
+    </div>
+    <div>
+        <a href="{% url 'users:register' %}">Don't have an account yet? Click to register </a> 
+    </div>
+{% endblock content %}

@@ -1,7 +1,7 @@
 '''URLconfig for users'''
 
 from django.urls import path
-from django.contrib.auth.views import login
+from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth.models import User
 from . import views
 
@@ -9,9 +9,19 @@ app_name='users'
 
 urlpatterns = [
         #login page
-        path('login/',login,{'template_name':'users/login.html'},name='login'),
+        path(
+            'login/',
+            LoginView.as_view(
+                template_name='users/login.html',
+#                redirect_field_name='blog:index',
+                ),
+            name='login'),
         #Log our page
-        path('logout/',views.user_logout,name='logout'),
+        path('logout/',
+            LogoutView.as_view(
+                next_page='guide:index',
+                ),
+            name='logout'),
         #register page
         path('register/',views.register,name='register'),
         ]

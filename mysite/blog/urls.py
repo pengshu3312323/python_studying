@@ -8,7 +8,7 @@ from .models import Blog_post
 app_name = 'blog'
 
 urlpatterns=[
-        #page of blog
+        #Homepage of blog
         path('',views.index,name='index'),
         #posts of blog
         path(

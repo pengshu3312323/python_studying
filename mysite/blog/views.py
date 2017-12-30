@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404,get_list_or_404
-from blog.models import Blog_post,Information,Post_form,Blog_info_form
+from blog.models import Blog_post,Post_image,Information,Post_form,Blog_info_form
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -52,9 +52,11 @@ def blog_info_edit(request):
 def post_detail(request,post_id):
     '''Single post'''
     post=get_object_or_404(Blog_post,pk=post_id)
-    context={'post':post}
+    images=Post_image.objects.all().filter(post_id=post_id).order_by('id')
+    context={'post':post,'images':images}
     return render(request,'blog/post_detail.html',context)
 
+@login_required 
 def post_edit(request,post_id):
     '''Edit each post'''
     post=get_object_or_404(Blog_post,pk=post_id)
@@ -72,6 +74,7 @@ def post_edit(request,post_id):
         }
     return render(request,'blog/post_edit.html',context)
 
+@login_required 
 def post_delete(request,post_id):
     '''Delete a post'''
     post=get_object_or_404(Blog_post,pk=post_id)

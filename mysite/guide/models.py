@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Favorite(models.Model):
     '''User's favorite web'''
     name=models.CharField(max_length=50)
-    address=models.URLField()
+    address=models.TextField()
     time_added=models.DateTimeField(auto_now_add=True)
     owner=models.ForeignKey(User,on_delete=models.CASCADE,)
 
