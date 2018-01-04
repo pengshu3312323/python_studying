@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-
 {% extends "blog/base.html" %}
 
-{% block content %}
-  <h1>{{info.blog_name|title}}</h1>
-  <hr>
-  {{info.blog_writer|title}}
-  <p>{{info.blog_describe}}</p>
+{% block header %}
+  <title>About</title>
+{% endblock %}
 
-  <a href = {% url "blog:blog_info_edit" %}>Edit</a>
+{% block content %}
+  <h1>{{ info.blog_name|title }}</h1>
+  <hr>
+  {{ info.blog_writer|title }}
+  <p>{{ info.blog_describe }}</p>
+
+  {% if perm_flag %}
+    <a href = {% url "blog:blog_info_edit" %}>Edit</a>
+  {% endif %}
 {% endblock content %}

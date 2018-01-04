@@ -11,7 +11,7 @@ class Blog_post(models.Model):
     title=models.CharField(max_length=100)
     body=models.TextField()
     time_added=models.DateTimeField(auto_now_add=True)
-    owner=models.ForeignKey(User,on_delete=models.CASCADE)
+#    owner=models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
         '''return doc of class'''
@@ -20,7 +20,7 @@ class Blog_post(models.Model):
 class Post_image(models.Model):
     '''Images in post'''
     image=models.ImageField(upload_to=upload_to)
-    post=models.ForeignKey(Blog_post,on_delete=models.CASCADE)
+    post=models.ForeignKey(Blog_post,on_delete=models.CASCADE,verbose_name='the image in the post')
 
     def __str__(self):
         return self.__doc__
@@ -30,21 +30,8 @@ class Information(models.Model):
     blog_name=models.CharField(max_length=50)
     blog_writer=models.CharField(max_length=30)
     blog_describe=models.TextField()
-    owner=models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
         '''return the name of class'''
         return self.blog_name
-
-############ModelForms#####################
-
-class Post_form(ModelForm):
-    class Meta:
-        model=Blog_post
-        fields=['title','body']
-
-class Blog_info_form(ModelForm):
-    class Meta:
-        model=Information
-        fields=['blog_name','blog_describe']
 

@@ -5,11 +5,11 @@
 {% endblock header %}
 
 {% block content %}
-    <div>
-        <form action="{% url 'users:register' %}" method="POST">
+    <div class="container">
+        <form class="form-signin" action="{% url 'users:register' %}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button name="submit">Register</button>
+            <button class="btn btn-md btn-light" type="submit">注册</button>
         </form>
     </div>
 {% endblock content %}

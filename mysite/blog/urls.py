@@ -11,25 +11,9 @@ urlpatterns=[
         #Homepage of blog
         path('',views.index,name='index'),
         #posts of blog
-        path(
-            'post/',
-            ListView.as_view(
-                queryset=Blog_post.objects.order_by('-time_added'),
-                context_object_name='posts',
-                template_name='blog/post.html'
-                ),
-            name='post'
-            ),
+        path('post/',views.post,name='post'),
         #information of blog
-        path(
-            'about/',
-            DetailView.as_view(
-                model='Blog_post',
-                context_object_name='post',
-                template_name='blog/post_detail.html'
-                ),
-            name='about'
-            ),
+        path('about/',views.about,name='about'),
         #create a post
         path('post/create/',views.create_post,name='create_post'),
         #delete a post       

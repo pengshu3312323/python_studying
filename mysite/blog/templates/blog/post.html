@@ -1,25 +1,43 @@
 {% extends "blog/base.html" %}
 
 {% block header %}
-  <title>Blog Post</title>	
+  <title>Blog Post</title>
+  <link media='screen' type='text/css' rel='stylesheet' href='http://l.bst.126.net/rsc/js/pagelayer/pagelayer.css?0017'/>
+  <link href='http://lofter.ph.126.net/5eRBnd52-fVKcA8qm3Z8jg==/5629540216143351296.css' type="text/css" rel="stylesheet" />  
+  <script type='text/javascript' src='http://l.bst.126.net/rsc/js/pagelayer/pagelayer.js?0011'></script>	
 {% endblock header %}
 
 {% block content %}
-
   <div class="jumbotron">
-    <h1>Meet Pencil</h1>
+    <div class="container">
+      <h3>Meet Pencil</h3>
+    </div>
+  </div>
+    
+  <div class="container">
+    <p>
+      {% if perm_flag %}
+        <a class="btn btn-link btn-md text-muted" href = {% url "blog:create_post" %}>发布新的</a>
+      {% endif %}
+    </p>
   </div>
 
-  <a href = {% url "blog:create_post" %}>New post</a>
   <hr>
-  <li>
-    {% for post in posts %}
-      <a href={% url "blog:post_detail" post.id %}>{{post.title|title}}</a>
-      <p>{{post.body}}</p>
-      <p>{{post.time_added}}</p>
-      <hr>
-    {% empty %}
-      <li>No post written yet.</li>
-    {% endfor %}
-  </li>
+  <div class="container">
+    <ul class="list">
+      {% for post in posts %}
+        <li class="photo">
+          <h4 class="post-title">
+            <a href={% url "blog:post_detail" post.id %}>{{post.title|title}}</a>
+          </h4>
+          <span class="pic">
+              <img src="{{ post.Post_image.image.url }}">
+          </span>
+          <p>{{post.time_added}}</p>
+        </li>
+        {% empty %}
+          <p>No post written yet.</p>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock content %}

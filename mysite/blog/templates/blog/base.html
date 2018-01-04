@@ -1,7 +1,7 @@
 {% load bootstrap4 %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,40 +10,38 @@
 
     {% block header %}{% endblock header %}
 
+    <style>
+        body{
+            background-image: url("static/blog/bg01-16-9.jpg");
+        }
+    </style>
+
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 
 </head>
 <body>
-    <!--Static navbar-->
-    <nav class="navbar navbar-light bg-light">
+        
+    <nav class="navbar navbar-default navbar-tall" role="navigation">
         <div class="nav navbar-left">
             <span class="navbar-brand mb-0 h1">MeetPencil</span>
 
-            <a class="nav-item nav-link text-muted" href="{% url 'blog:index' %}">
-                Blog
-            </a>
-            <a class="nav-item nav-link text-muted" href="{% url 'guide:index' %}">
-                Guide
-            </a>
+            <a class="nav-item nav-link text-muted" href="{% url 'blog:index' %}">博客</a>
+            <a class="nav-item nav-link text-muted" href="{% url 'guide:index' %}">导航</a>
         </div>
 
         <div class="nav navbar-right">
             {% if user.is_authenticated %}
                 <a class="nav-item nav-link disabled text-muted">Hi,{{ user.username }}</a>
-                <a class="nav-item nav-link text-muted" href="{% url 'users:logout' %}">Log out</a>
+                <a class="nav-item nav-link text-muted" href="{% url 'users:logout' %}">注销</a>
             {% else %}
-                <a class="nav-item nav-link text-muted" href="{% url 'users:register' %}">Register</a>
-                <a class="nav-item nav-link text-muted" href="{% url 'users:login' %}">Log in</a>
+                <a class="nav-item nav-link text-muted" href="{% url 'users:register' %}">注册</a>
+                <a class="nav-item nav-link text-muted" href="{% url 'users:login' %}">登陆</a>
             {% endif %}           
         </div>
     </nav>
 
-    <div class="container">
-        <div>
-            {% block content %}{% endblock content %}
-        </div>
-    </div> <!-- /container -->
-
+    {% block content %}{% endblock content %}
+         
 </body>
 </html>

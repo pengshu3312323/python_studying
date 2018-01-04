@@ -37,10 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #my app:
+    #My app:
     'blog',
     'guide',
     'users',
+    #Third party app:
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -136,4 +138,9 @@ STATICFILES_FINDERS = [
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
+#Setting for Django-bootstrap4
 
+BOOTSTRAP4 = {
+        'including_jquery':True,
+        'including_popper.js':True,
+        }
