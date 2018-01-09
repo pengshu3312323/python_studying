@@ -31,7 +31,7 @@
             <a href={% url "blog:post_detail" post.id %}>{{post.title|title}}</a>
           </h4>
           <span class="pic">
-              <img src="{{ post.Post_image.image.url }}">
+              <img src="{{ images.image.url }}">
           </span>
           <p>{{post.time_added}}</p>
         </li>

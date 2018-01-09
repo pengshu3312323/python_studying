@@ -55,7 +55,7 @@ def create_post(request):
 @permission_required('blog.change_Information')
 def blog_info_edit(request):
     '''Edit the information of the blog'''
-    info=Information.objects.all().filter(pk=1)
+    info=Information.objects.get(pk=1)
     if request.method!='POST':
         form=Blog_info_form(instance=info)
     elif request.method=='POST':
@@ -70,7 +70,7 @@ def blog_info_edit(request):
 def post_detail(request,post_id):
     '''Single post'''
     post=get_object_or_404(Blog_post,pk=post_id)
-    images=Post_image.objects.all().filter(post=post_id)
+    images=Post_image.objects.filter(post=post_id)
     #check the permission
     perm_flag=request.user.has_perm('blog.change_Blog_post') \
             and request.user.has_perm('blog.Delete_Blog_post')
@@ -81,19 +81,31 @@ def post_detail(request,post_id):
 @permission_required('blog.change_Blog_post')
 def post_edit(request,post_id):
     '''Edit each post'''
-    post=get_object_or_404(Blog_post,pk=post_id)
     if request.method!='POST':
-        form=Post_form(instance=post)
+        #bound the post to the form
+        post=Blog_post.objects.get(pk=post_id)
+        data={
+            'title':post.title,
+            'body':post.body,
+                }
+        form=Post_form(data)
     elif request.method=='POST':
-        form=Post_form(request.POST)
+        form=Post_form(request.POST,request.FILES)
         if form.is_valid():
-            form.save()
+            title=form.cleaned_data['title']
+            body=form.cleaned_data['body']
+            image=request.FILES['image']
+            #update the post
+            post=Blog_post.objects.get(pk=post_id)
+            post.title=title
+            post.body=body
+            #update the post image
+            image=Post_image.objects.create(image=image,post=post)
+            post.post_image_set.set([image,])
+            post.save()
         return HttpResponseRedirect(reverse('blog:post'))
 
-    context={
-        'post':post,
-        'form':form,
-        }
+    context={'form':form}
     return render(request,'blog/post_edit.html',context)
 
 @login_required
