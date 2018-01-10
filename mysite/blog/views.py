@@ -14,7 +14,11 @@ def index(request):
 def post(request):
     '''Post page of blog'''
     posts=Blog_post.objects.order_by('-time_added')
-    images=Post_image.objects.all()
+#    images=[]
+#    for post in posts:
+#        image=post.blog_image_set[0]
+#        images.append(image)
+
     perm_flag=request.user.has_perm('blog.add_Blog_post') #check permission
     context={'posts':posts,'perm_flag':perm_flag,'images':images}
     return render(request,'blog/post.html',context)

@@ -1,3 +1,7 @@
-./blog/__pycache__
-./guide/__pycache__
-./users/__pycache__
+__pycache__/
+db.sqlite3
+ms_env/
+manage.py
+uwsgi.ini
+learning_log.md
+script/
