@@ -5,3 +5,6 @@ manage.py
 uwsgi.ini
 learning_log.md
 script/
+.idea/
+.vscode/
+media/
