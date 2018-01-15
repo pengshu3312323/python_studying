@@ -25,15 +25,15 @@
   <hr>
   <div class="container">
     <ul class="list">
-      {% for post in posts %}
+      {% for preview in previews %}
         <li class="photo">
           <h4 class="post-title">
-            <a href={% url "blog:post_detail" post.id %}>{{post.title|title}}</a>
+            <a href={% url "blog:post_detail" preview.post.id %}>{{ preview.post.title|title }}</a>
           </h4>
           <span class="pic">
-              <img src="{{ images.image.url }}">
+              <img src="{{ preview.image.image.url }}">
           </span>
-          <p>{{post.time_added}}</p>
+          <p>{{ preview.post.time_added }}</p>
         </li>
         {% empty %}
           <p>No post written yet.</p>

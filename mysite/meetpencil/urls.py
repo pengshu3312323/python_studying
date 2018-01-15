@@ -18,8 +18,11 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
+from django.shortcuts import redirect
+from blog.views import index
 
 urlpatterns = [
+    path('',index),    
     path('admin/', admin.site.urls),
     path('blog/',include('blog.urls',namespace='blog')),
     path('guide/',include('guide.urls',namespace='guide')),
