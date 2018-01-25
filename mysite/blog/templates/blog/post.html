@@ -2,42 +2,34 @@
 
 {% block header %}
   <title>Blog Post</title>
-  <link media='screen' type='text/css' rel='stylesheet' href='http://l.bst.126.net/rsc/js/pagelayer/pagelayer.css?0017'/>
-  <link href='http://lofter.ph.126.net/5eRBnd52-fVKcA8qm3Z8jg==/5629540216143351296.css' type="text/css" rel="stylesheet" />  
-  <script type='text/javascript' src='http://l.bst.126.net/rsc/js/pagelayer/pagelayer.js?0011'></script>	
+  <link href='http://lofter.ph.126.net/5eRBnd52-fVKcA8qm3Z8jg==/5629540216143351296.css' type="text/css" rel="stylesheet" />
+
 {% endblock header %}
 
 {% block content %}
-  <div class="jumbotron">
-    <div class="container">
-      <h3>Meet Pencil</h3>
-    </div>
-  </div>
-    
-  <div class="container">
-    <p>
-      {% if perm_flag %}
-        <a class="btn btn-link btn-md text-muted" href = {% url "blog:create_post" %}>发布新的</a>
-      {% endif %}
-    </p>
+  <div class="container">  
+      <p>
+        {% if perm_flag %}
+          <a class="btn btn-link btn-md text-muted" href = {% url "blog:create_post" %}>发布新的</a>
+        {% endif %}
+      </p>
   </div>
 
   <hr>
   <div class="container">
-    <ul class="list">
+    <div class="card-columns text-center">
       {% for preview in previews %}
-        <li class="photo">
-          <h4 class="post-title">
-            <a href={% url "blog:post_detail" preview.post.id %}>{{ preview.post.title|title }}</a>
-          </h4>
-          <span class="pic">
-              <img src="{{ preview.image.image.url }}">
-          </span>
-          <p>{{ preview.post.time_added }}</p>
-        </li>
-        {% empty %}
+        <a class="nav-link text-dark" href={% url "blog:post_detail" preview.post.id %}>{{ preview.post.title|title }}</a>
+        <div class="card">
+          {% if preview.image %}  
+            <img class="card-img-top" alt="Card image cap" src="{{ preview.image.image.url }}">
+          {% endif %} 
+        </div>                       
+      {% empty %}
+        <div class="col-md-12">
           <p>No post written yet.</p>
+        </div>          
       {% endfor %}
-    </ul>
+    </div>
   </div>
 {% endblock content %}

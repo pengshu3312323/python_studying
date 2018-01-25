@@ -18,9 +18,13 @@ def post(request):
     for post in posts:
         temp={}
         post_id=post.id
-        image=Post_image.objects.filter(post__id=post_id)[0]
         temp['post']=post
-        temp['image']=image
+        image=Post_image.objects.filter(post__id=post_id)
+        if len(image)!=0:
+            temp['image']=image[0]
+        else:
+            temp['image']=None
+
         previews.append(temp)
 
     perm_flag=request.user.has_perm('blog.add_Blog_post') #check permission

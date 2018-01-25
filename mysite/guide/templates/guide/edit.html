@@ -1,26 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>		
-<meta charset="utf-8">
-<meta name="author",content="Pencil">
-<title>Favorite_site_edit</title>
-</head>
-
-<body>
 {% extends "blog/base.html" %}
 
-{% block content %}
-  <h5>My Sites</h5>
-	<li>
-	{% for favorite in favorites %}
-		{{favorite.name|title}}
-		{% empty %}
-		  <p>No favorite site yet</p>
-  </li>
-	{% endfor %}
-	<br>
-	<a href = {% url "guide:add" %}>Add</a>
-{% endblock %}
-</body>
+{% block header %}
+  <title>Favorite site edit</title>
+{% endblock header %}
 
-</html>
+{% block content %}
+<div class="container text-center">
+	<br>
+	<br>
+	<br>
+	<h4>我的收藏</h4>
+	<div class="container">
+		<ul class="nav">
+		{% for favor in favorites %}
+			<li class="nav-link disabled">
+				<a class="nav-link text-dark" href ="{{favor.address}}">{{favor.name|title}}</a>
+			</li>
+		{% endfor %}
+		</ul>
+		<br>
+		<p class="lead">
+			<a class="btn btn-link mb-2 text-dark" href="{% url 'guide:add' %}">添加</a>
+			<a class="btn btn-link mb-2 text-dark" href="{% url 'guide:index' %}">返回</a>
+		</p>
+	</div>
+</div>
+{% endblock content %}

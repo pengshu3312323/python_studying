@@ -11,5 +11,5 @@ urlpatterns=[
         #Edit the favorite site
         path('edit/',views.edit,name='edit'),
         #Add a new favorite site
-        path('edit/add',views.add,name='add'),
+        path('edit/add/',views.add,name='add'),
         ]

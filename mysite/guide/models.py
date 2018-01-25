@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import ModelForm
 from django.contrib.auth.models import User
 
 class Favorite(models.Model):
@@ -12,11 +11,4 @@ class Favorite(models.Model):
     def __str__(self):
         return self.name
 
-#------------------Model Forms-------------------
-
-class Favorite_form(ModelForm):
-    '''Form of adding favorite site'''
-    class Meta:
-        model=Favorite
-        fields=['name','address']
 

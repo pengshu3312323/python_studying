@@ -8,7 +8,7 @@ from .models import Information
 class Post_form(forms.Form):
     '''The form for blog post creation or edit'''
     title=forms.CharField(label='Post title',max_length=100)
-    body=forms.CharField(label='Post body',widget=forms.Textarea)
+    body=forms.CharField(label='Post body',widget=forms.Textarea,required=False)
     image=forms.ImageField(label='Image',required=False)
 
 class Information_form(forms.ModelForm):

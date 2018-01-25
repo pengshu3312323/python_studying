@@ -2,22 +2,51 @@
 
 {% block header %}
 	<title>Guide</title>
+	
 {% endblock header %}
 
 {% block content %}
-		<br>			
-		<li>
-		  {% for favor in favorite %}
-				<a href ="{{favor.address}}">{{favor.name|title}}</a>
-				<hr>
-		  {% endfor %}
-		</li>
-		<p>
+<div class="container-fluid">
+	<div class="container">
+		<br>
+		<br>
+		<form method='POST' enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="form-row justify-content-md-center">
+				<div class="col-md-6">
+					<input class="form-control form-control-lg" type="text" placeholder="Search" name="keywords">
+				</div>
+			</div>
+			<br>	
+			<div class="form-row justify-content-md-center">
+				<div class="col-md-2">
+					<button class="btn btn-light btn-primary btn-block" name="submit">Search</button>
+				</div>
+			</div>	
+		</form>
+		<br>
+	</div>	
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="container">	
+		<ul class="nav">		
+			{% for favor in favorite %}
+				<li class="nav-link disabled">
+					<a class="nav-link text-dark" href ="{{favor.address}}">{{favor.name|title}}</a>
+				</li>
+			{% endfor %}
+		</ul>		
+		<hr>
+		<ul class="nav">
 			{% if favorite %}
-				<a href="{% url 'guide:edit' %}">Edit</a>
+				<a class="nav-link disabled" href="{% url 'guide:edit' %}">管理收藏</a>
 			{% else %}
-				<a href="{% url 'guide:edit' %}">Add your favorite sites</a>
+				<a class="nav-link disabled" href="{% url 'guide:edit' %}">添加收藏</a>
 			{% endif %}
-		</p>
+		</ul>
+	</div>
+</div>		
 {% endblock %}
 
