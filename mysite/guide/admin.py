@@ -1,4 +1,11 @@
+######################################################
+#---Admin Config for 'guide' app---
+#
+#---Written by:Peng Shu
+######################################################
+
 from django.contrib import admin
+
 from .models import Favorite
 
 class Favorite_admin(admin.ModelAdmin):

@@ -5,12 +5,25 @@
 {% endblock %}
 
 {% block content %}
-  <h1>{{ info.blog_name|title }}</h1>
-  <hr>
-  {{ info.blog_writer|title }}
-  <p>{{ info.blog_describe }}</p>
-
-  {% if perm_flag %}
-    <a href = {% url "blog:blog_info_edit" %}>Edit</a>
-  {% endif %}
+  <div class="container" style="padding-left:200px;padding-right:200px;">
+    <br>
+    <br>
+    <br>
+    <h2>MeetPencil</h2>
+    <hr> 
+    <p>一个<del>玩具</del>练习项目</p>
+    <p>作者:Pencil</p>
+    <p>导航首页+作者个人照片墙（比较喜欢拍照</p>
+    <p>基于Django 2.0框架搭建，通过Bootstrap 4.0实现了简单前端效果</p>
+    <p>通过uwsgi+nginx部署于阿里云服务器上，暂无域名，IP：120.79.174.201</p>
+    <p>如果有什么问题可以通过邮箱联系我，期待你的建议和意见</p>
+    <p>邮箱：pengshu3312323@163.com</p>
+    <p><a class="text-dark" href="github.com/pengshu3312323/Django_project_meetpencil">Github主页：github.com/pengshu3312323/Django_project_meetpencil</a></p>
+    {% if perm_flag %}
+      <hr>
+      <!--p class="lead">
+        <a class="btn btn-lg btn-link text-muted" href = {% url "blog:blog_info_edit" %}>编辑</a>
+      </p-->
+    {% endif %}
+  </div>
 {% endblock content %}

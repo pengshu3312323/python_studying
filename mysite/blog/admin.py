@@ -1,4 +1,11 @@
+###################################################
+#---Admin Config for 'blog' app---
+#
+#---Written by:Peng Shu
+###################################################
+
 from django.contrib import admin
+
 from blog.models import Blog_post,Information,Post_image,Background
 
 class Blog_post_admin(admin.ModelAdmin):

@@ -1,7 +1,12 @@
-'''blog's URLConfig'''
+#######################################################
+#---URLConfig of 'blog' page---
+#
+#---Written by:Peng Shu
+#######################################################
 
 from django.urls import path,include
 from django.views.generic import ListView,DetailView,DeleteView
+
 from . import views
 from .models import Blog_post
 

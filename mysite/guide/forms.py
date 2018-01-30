@@ -1,8 +1,9 @@
-'''Forms in guide'''
-
+#############################################
+#---Forms in 'guide' app---
+#
+#---Writtrn by:Peng Shu---
+#############################################
 from django import forms
-
-from .models import Favorite
 
 class Search_form(forms.Form):
     '''The form to search on Internet'''

@@ -1,5 +1,8 @@
-'''Search on the Internet'''
-
+##################################################
+#---Search tool for the 'guide' page---
+#
+#---Written by:Peng Shu
+##################################################
 engine = {
     'baidu':'https://www.baidu.com/s?wd=',
         }

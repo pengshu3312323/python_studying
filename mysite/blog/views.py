@@ -1,3 +1,10 @@
+#########################################################################
+#---View functions for 'blog' page---
+#
+#---Written by:Peng Shu
+#########################################################################
+
+
 from django.shortcuts import render,get_object_or_404,get_list_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
@@ -33,9 +40,13 @@ def post(request):
 
 def about(request):
     '''information of blog'''
-    info=Information.objects.all().filter(pk=1)
+#    infos=Information.objects.all().order_by('pk')
+#    info=infos[0]
     perm_flag=request.user.has_perm('blog.chenge_Information')#check permission
-    context={'info':info,'perm_flag':perm_flag}
+    context={
+#            'info':info,
+            'perm_flag':perm_flag
+            }
     return render(request,'blog/about.html',context)
 
 @login_required
@@ -45,19 +56,21 @@ def create_post(request):
     if request.method!='POST':
         form=Post_form()
     elif request.method=='POST':
-        form=Post_form(request.POST,request.FILES)
+        form=Post_form(request.POST)
         if form.is_valid():
             title=form.cleaned_data['title']
             body=form.cleaned_data['body']
-            image=form.cleaned_data['image']
+           # image=form.cleaned_data['images']
+            images=request.FILES.getlist('images')
 
             new_post=Blog_post.objects.create(title=title,body=body)
             new_post.save()
-            new_image=Post_image(
+            for image in images:
+                new_image=Post_image(
                     post=new_post,
-                    image=request.FILES['image']
+                    image=image
                     )    
-            new_image.save()
+                new_image.save()
             return HttpResponseRedirect(reverse('blog:post'))
 
     context={'form':form}

@@ -1,4 +1,8 @@
-'''Guide's URLconfig'''
+#####################################################
+#----URLconfig of 'guide' page---
+#
+#----Written by:Peng Shu---
+####################################################
 
 from django.urls import path
 from . import views

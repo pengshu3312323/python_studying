@@ -1,3 +1,9 @@
+#########################################################
+#---Models in the 'guide' app---
+#
+#---Written by:Peng Shu
+#########################################################
+
 from django.db import models
 from django.contrib.auth.models import User
 

@@ -1,3 +1,9 @@
+##########################################
+#----View functions for the 'guide' page----- 
+#
+#----Written by Peng Shu
+##########################################
+
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -32,12 +38,18 @@ def edit(request):
     else:
         return render(request,'users/login_or_register.html')
 
+protocol=('http','ftp')
+
 @login_required
 def add(request):
     '''Add a new fovorite site'''
     if request.method=='POST':
         name=request.POST['name']
-        address='http://'+request.POST['address']
+        address=request.POST['address']
+        if not address.startswith(protocol): 
+            #Check whether the user add the protocol or not
+            address = 'http://'+address
+
         new_site=Favorite.objects.create(name=name,address=address,owner=request.user)
         new_site.save()
         return HttpResponseRedirect(reverse('guide:edit'))
