@@ -2,8 +2,11 @@
 
 {% block header %}
   <title>Blog Post</title>
-  <link href='http://lofter.ph.126.net/5eRBnd52-fVKcA8qm3Z8jg==/5629540216143351296.css' type="text/css" rel="stylesheet" />
-
+  <script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+  </script>
 {% endblock header %}
 
 {% block content %}
@@ -19,12 +22,14 @@
   <div class="container">
     <div class="card-columns text-center">
       {% for preview in previews %}
-        <a class="nav-link text-dark" href={% url "blog:post_detail" preview.post.id %}>{{ preview.post.title|title }}</a>
-        <div class="card">
-          {% if preview.image %}  
-            <img class="card-img-top" alt="Card image cap" src="{{ preview.image.image.url }}">
-          {% endif %} 
-        </div>                       
+        {% if preview.image %}
+          <div class="card" data-toggle="tooltip" data-placement="top" title="{{ preview.post.title|title }}">            
+            <a href={% url "blog:post_detail" preview.post.id %}><img class="card-img-top" alt="Card image cap" src="{{ preview.image.image.url }}"></a>     
+          </div>
+        {% else %}
+          <a class="nav-link text-dark" href={% url "blog:post_detail" preview.post.id %}>{{ preview.post.title|title }}</a>  
+        {% endif %}
+        <hr>                         
       {% empty %}
         <div class="col-md-12">
           <p>No post written yet.</p>

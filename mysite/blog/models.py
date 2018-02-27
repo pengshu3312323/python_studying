@@ -25,7 +25,7 @@ class Blog_post(models.Model):
 
 class Post_image(models.Model):
     '''Images in post'''
-    image=models.ImageField(upload_to)
+    image=models.ImageField(upload_to=upload_to)
     post=models.ForeignKey(Blog_post,on_delete=models.CASCADE,verbose_name='the image in the post')
 
     def __str__(self):
