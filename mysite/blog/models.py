@@ -48,3 +48,10 @@ class Background(models.Model):
     def __str__(self):
         '''Return the model describe'''
         return self.__doc__
+
+class VisitorNum(models.Model):
+    '''The number of visitors'''
+    numbers=models.IntegerField()
+
+    def __str__(self):
+        return self.numbers
