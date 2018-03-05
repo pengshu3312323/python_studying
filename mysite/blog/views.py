@@ -10,6 +10,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import Permission
 from django.contrib.auth.decorators import login_required,permission_required
+from django.views.decorators.cache import cache_page
 
 from .models import Blog_post,Information,Post_image
 from .forms import Post_form,Information_form
@@ -18,6 +19,7 @@ def index(request):
     '''Homepage of the blog'''
     return render(request,'blog/index.html')
 
+@cache_page(60*30)
 def post(request):
     '''Post page of blog'''
     posts=Blog_post.objects.order_by('-time_added')
@@ -92,6 +94,7 @@ def blog_info_edit(request):
     context={'form':form}
     return render(request,'blog/blog_info_edit.html',context)
 
+@cache_page(60*30)
 def post_detail(request,post_id):
     '''Single post'''
     post=get_object_or_404(Blog_post,pk=post_id)
