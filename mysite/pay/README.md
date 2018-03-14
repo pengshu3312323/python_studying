@@ -26,6 +26,7 @@ ali_public_key.pem
 的形式存放在/the/path/your_django_site/pay/ali/keys/下
 
 配置settings.py
+---------------
 ```
 pub_params['app_id'] = ''#商户ID
 pub_params['sign_type'] = 'RSA2'# RSA 或者 RSA2
