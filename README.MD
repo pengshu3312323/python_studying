@@ -11,4 +11,5 @@
 邮箱：pengshu3312323@163.com
 Github主页：github.com/pengshu3312323/Django_project_meetpencil
 
-##[支付功能文档](https://github.com/pengshu3312323/Django_project_meetpencil/blob/master/mysite/pay/README.md)
+[支付功能文档](https://github.com/pengshu3312323/Django_project_meetpencil/blob/master/mysite/pay/README.md)
+------------------------------------------------------------------------------------------------------------
