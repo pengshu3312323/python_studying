@@ -11,18 +11,23 @@
 	<br>
 	<h4>我的收藏</h4>
 	<div class="container">
-		<ul class="nav">
+		<form action="{% url 'guide:edit' %}" method='POST' enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="row">
 		{% for favor in favorites %}
-			<li class="nav-link disabled">
-				<a class="nav-link text-dark" href ="{{favor.address}}">{{favor.name|title}}</a>
-			</li>
+				<div class="form-check col-sm-2">
+					<input class="form-check-input" type="checkbox" name="favorite" id="favorite" value="{{favor.id}}">
+					<label for="favorite">{{favor.name}}</label>
+				</div>				
 		{% endfor %}
-		</ul>
-		<br>
-		<p class="lead">
-			<a class="btn btn-link mb-2 text-dark" href="{% url 'guide:add' %}">添加</a>
-			<a class="btn btn-link mb-2 text-dark" href="{% url 'guide:index' %}">返回</a>
-		</p>
+			</div>	
+			<br>
+			<p class="lead">
+				<button type="submit" class="btn btn-link mb-2 text-dark">删除</button>
+				<a class="btn btn-link mb-2 text-dark" href="{% url 'guide:add' %}">添加</a>
+				<a class="btn btn-link mb-2 text-dark" href="{% url 'guide:index' %}">返回</a>
+			</p>
+		</form>
 	</div>
 </div>
 {% endblock content %}

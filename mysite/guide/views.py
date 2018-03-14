@@ -32,9 +32,16 @@ def index(request):
 def edit(request):
     '''Edit my favorite site'''
     if request.user.is_authenticated:
-        favorites=Favorite.objects.order_by('time_added')
-        context={'favorites':favorites,}
-        return render(request,'guide/edit.html',context)
+        if request.method!='POST':
+            favorites=Favorite.objects.order_by('time_added')
+            context={'favorites':favorites,}
+            return render(request,'guide/edit.html',context)
+        elif request.method=='POST':
+            ids=request.POST.getlist('favorite')#Which you want to delete
+            for i in ids:
+                site=Favorite.objects.get(pk=i)
+                site.delete()
+            return HttpResponseRedirect(reverse('guide:edit'))
     else:
         return render(request,'users/login_or_register.html')
 

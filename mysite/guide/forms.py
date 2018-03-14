@@ -10,3 +10,5 @@ class Search_form(forms.Form):
     keywords=forms.CharField(label='Search',max_length=50)
 #    engine
 
+class Favorite_site_form(forms.Form):
+    pass
