@@ -12,7 +12,7 @@ from django.urls import reverse
 
 from .models import Order
 from blog.models import Blog_post
-from .ali.alipay import ali_trade_page_pay
+from .ali.alipay import ali_trade_page_pay,ali_notify_handler,ali_order_query
 
 goods_detail_url='blog:post_detail'
 
@@ -41,7 +41,7 @@ def checkout(request,post_id):# Treat my post as goods
     goods_body='This is for sell'
 
     if not request.user.is_authenticated:
-        return render(request,'users/login_or)register.html')
+        return render(request,'users/login_or_register.html')
     else:
         post=Blog_post.objects.filter(pk=post_id)[0]# Treat my post as goods
         subject = post.title
@@ -81,20 +81,32 @@ def pay(request,order_id):
 #    elif request.POST.get('payment_method')=='Weixin': 
     return HttpResponseRedirect(payment_url)
 
-def notify_url_handler(request):
+# The func below is not working............
+#@login_required
+#def order_query(request,order_id):
+    '''Query your order`s status'''
+'''    order=Order.objects.filter(pk=order_id)[0]
+    trade_no=order.trade_no
+
+    res=ali_order_query(trade_no)
+    print(res)
+
+    return HttpResponse('res')
+'''
+
+def notify_handler(request):
     ''' Notify of the order payment status'''
     if request.method == 'POST':
-        tn = request.POST.get('out_trade_no')
-        trade_status = request.POST.get('trade_status')
-        print('Order:{},Status:{}'.format(tn,trade_status))
-        if trade_status in ('TRADE_SUCCESS','TRADE_FINISHED'):
+        data=request.POST.dict()
+        status=ali_notify_handler(data) # Notification Validation
+        if status:
             return HttpResponse("success")
         else:
             return HttpResponse ("fail")
     else:
         return HttpResponse ("fail")
 
-def return_url_handler(request,order_id):
+def return_handler(request,order_id):
     ''' Return the status of payment'''
     if request.method == 'GET':
         order=Order.objects.filter(pk=order_id)[0]

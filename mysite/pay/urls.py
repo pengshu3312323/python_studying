@@ -26,6 +26,7 @@ urlpatterns=[
         path('orders/',views.order_list,name='order_list'),
         path('orders/<int:order_id>/',views.order_detail,name='order_detail'),
         path('orders/<int:order_id>/comfirm/',views.pay,name='comfirm_to_pay'),
-        path('orders/notify/',views.notify_url_handler,name='notify'),
-        path('orders/<int:order_id>/return/',views.return_url_handler,name='return'),
+        path('orders/notify/',views.notify_handler,name='notify'),
+        path('orders/<int:order_id>/return/',views.return_handler,name='return'),
+#        path('orders/<int:order_id>/query/',views.order_query,name='order_query'),
         ]

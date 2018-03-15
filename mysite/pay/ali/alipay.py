@@ -29,3 +29,49 @@ def ali_trade_page_pay(params):
     payment_url=settings.GATEWAY+order_string
 
     return payment_url
+
+def ali_notify_handler(data):
+    '''
+    Notification
+    Input a dictionary receive from AliPay by method POST
+    Return True if payment success
+    '''
+    alipay=AliPay(
+        appid = settings.pub_params['app_id'],
+        app_notify_url = settings.pub_params['app_notify_url'],
+        sign_type = settings.pub_params['sign_type'],
+        app_private_key_string = settings.pub_params['private_key'],
+        alipay_public_key_string = settings.pub_params['alipay_public_key'],
+        debug = True
+        )
+
+    signature = data.pop('sign')
+    success = alipay.verify(data,signature)
+
+    if success and data['trade_status'] in ('TRADE_SUCCESS','TRADE_FINISHED'):
+        print('trade succeed')
+        return True
+    else:
+        return False
+
+# The func below is not working........
+def ali_order_query(out_trade_no):
+    '''
+    Query the order`s status
+    Input:Order`s out_trade_no,which create by seller
+    Return:Status of the order
+    '''
+    alipay=AliPay(
+        appid = settings.pub_params['app_id'],
+        app_notify_url = settings.pub_params['app_notify_url'],
+        sign_type = settings.pub_params['sign_type'],
+        app_private_key_string = settings.pub_params['private_key'],
+        alipay_public_key_string = settings.pub_params['alipay_public_key'],
+        debug = True
+    )
+
+    res = alipay.api_alipay_fund_trans_order_query(
+             out_biz_no = out_trade_no
+             )
+
+    return res
