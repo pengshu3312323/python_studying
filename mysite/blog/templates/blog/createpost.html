@@ -1,0 +1,31 @@
+
+{% extends "blog/base.html" %}
+
+{% block header %}
+  <title>Publish a new post</title>
+{% endblock header %}
+
+{% block content %}
+  <div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <form action="{% url "blog:create_post" %}" method='POST' enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="title">标题</label>
+        {{ form.title }}
+      </div>
+      <div class="form-group">
+        <label for="body">正文</label>
+        {{ form.body }}
+      </div>
+      <div class="form-group">
+        <label for="id_images">Images</label>
+        <input type="file" class="form-control-file" name="images" id="id_images" multiple="multiple">
+      </div>
+      <button name="submit">发布</button>	
+    </form>
+  </div> 
+{% endblock %}

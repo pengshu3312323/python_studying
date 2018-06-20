@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+
+{% block header %}
+  <title>Add an new site</title>
+{% endblock header %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container text-center">
+  <form class="form-row justify-content-center" action="{% url "guide:add" %}" method="POST" novalidate="true">
+    {% csrf_token %}
+    <div class="form-group col-md-4">
+      <input type="text" class="form-control" name="name" placeholder="名称,如：淘宝">
+    </div>
+    <br>
+    <div class="form-group col-md-4">
+      <input type="text" class="form-control" name="address" placeholder="地址,如：www.taobao.com">
+    </div>
+
+    <div class="col-1">
+      <button type="submit" class="btn btn-link mb-2 text-dark">保存</button>
+    </div>
+    <div class="col-1">
+      <a class="btn btn-link mb-2 text-dark" href="{% url 'guide:index' %}">返回</a>
+    </div>    
+  </form>
+</div>  
+{% endblock %}
+<!--action="{% url "guide:add" %}"-->
