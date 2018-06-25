@@ -25,7 +25,7 @@ SECRET_KEY = 'h^h4f5$!jphh$##s7#*+nedol&yes@^7#!2rni1$+=n5k5a=fj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'meetpencil_server']
 
 
 # Application definition
@@ -86,8 +86,8 @@ DATABASES = {
         'NAME':'meetpencil',
         'USER':'root',
         'PASSWORD':'hummel165',
-        'HOST':'',
-        'PORT':'',
+        'HOST':'127.0.0.1',
+        'PORT':'3306',
     }
 }
 
@@ -150,3 +150,30 @@ BOOTSTRAP4 = {
         'including_jquery':True,
         'including_popper.js':True,
         }
+
+LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'standard': {
+                'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(pathname)s:%(filename)s:%(lineno)d] [%(levelname)s]- %(message)s'
+            },
+        },
+        'handlers': {
+            'default': {
+                'level': 'DEBUG',
+                'class': 'logging.handlers.RotatingFileHandler',
+                'filename': os.path.join(os.path.abspath(os.path.dirname(__file__)), '../log/debug.log'),
+                'maxBytes': 1024 * 1024 * 20,
+                'backupCount': 5,
+                'formatter': 'standard',
+            },
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['default'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+        },
+}
