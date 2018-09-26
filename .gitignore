@@ -11,5 +11,4 @@ media/
 meetpencil/settings.py
 log/
 *.swp
-gunicorn.py
 manage.py

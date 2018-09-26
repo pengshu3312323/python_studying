@@ -1,15 +1,11 @@
-Ò»¸ö<del>Íæ¾ß</del>Á·Ï°ÏîÄ¿
+# MeetPencil
 
-µ¼º½Ê×Ò³+×÷Õß¸öÈËÕÕÆ¬Ç½£¨±È½ÏÏ²»¶ÅÄÕÕ£©
+ä¸€ä¸ª<del>ç©å…·</del>ç»ƒä¹ é¡¹ç›®
 
-»ùÓÚDjango 2.0¿ò¼Ü´î½¨£¬Í¨¹ıBootstrap 4.0ÊµÏÖÁË¼òµ¥Ç°¶ËĞ§¹û
+å¯¼èˆª + åšå®¢(æš‚æ—¶å…³é—­)
 
-Í¨¹ıuwsgi+nginx²¿ÊğÓÚ°¢ÀïÔÆ·şÎñÆ÷ÉÏ£¬ÔİÎŞÓòÃû£¬IP£º<a href="http://120.79.174.201">120.79.174.201</a>
+åŸºäºDjango 2.0 å’Œ Bootstrap 4.0
 
-Èç¹ûÓĞÊ²Ã´ÎÊÌâ¿ÉÒÔÍ¨¹ıÓÊÏäÁªÏµÎÒ£¬ÆÚ´ıÄãµÄ½¨ÒéºÍÒâ¼û
+Í¨**æ¬¢è¿è®¿é—®å“¦  <a href="http://meetpencil.tk">meetpencil.tk</a>**
 
-ÓÊÏä£ºpengshu3312323@163.com
-GithubÖ÷Ò³£ºgithub.com/pengshu3312323/Django_project_meetpencil
-
-[Ö§¸¶¹¦ÄÜÎÄµµ](https://github.com/pengshu3312323/Django_project_meetpencil/blob/master/mysite/pay/README.md)
-------------------------------------------------------------------------------------------------------------
+æˆ‘çš„é‚®ç®±pengshu3312323@163.com
