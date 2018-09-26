@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+
+{% block header %}
+  <title>{{post.title}}</title>
+{% endblock header %}
+
+{% block content %}
+  <div class="container">			
+      <h1 class="display-4">{{post.title|title}}</h1>
+  </div>		
+  <div class="container">
+    <p class="lead">{{post.body}}</p>
+  </div>
+  <div class="container">
+    {% for image in images %}
+      <img class="img-fluid" src="{{ image.image.url }}">
+    {% empty %}
+  </div>
+  {% endfor %}
+  <hr>
+  <div class="container">
+    {% if perm_flag %}
+      <a class="btn btn-link btn-md text-muted" href="{% url 'blog:post_edit' post.id %}">编辑</a>
+      <a class="btn btn-link btn-md text-muted" href="{% url 'blog:post_delete' post.id %}">删除</a>
+    {% endif %}
+  </div>
+{% endblock %}
+

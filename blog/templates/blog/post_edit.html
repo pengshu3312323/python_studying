@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+
+{% block header %}
+  <title>Post_edit_page</title>
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-md btn-light" name="submit">保存</button>
+  </form>
+</div>  	
+{% endblock content %}      

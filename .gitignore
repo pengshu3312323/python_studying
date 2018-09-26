@@ -1,0 +1,15 @@
+__pycache__/
+db.sqlite3
+ms_env/
+manage.py
+uwsgi.ini
+learning_log.md
+script/
+.idea/
+.vscode/
+media/
+meetpencil/settings.py
+log/
+*.swp
+gunicorn.py
+manage.py
