@@ -23,13 +23,10 @@ from django.shortcuts import redirect
 
 
 urlpatterns = [
-    path('favicon.ico', RedirectView.as_view(url='/static/icon/favicon.ico')),
+    path('favicon.ico', RedirectView.as_view(url='/static/images/favicon.ico')),
     path('', RedirectView.as_view(url='/guide/')),
     path('admin/', admin.site.urls),
     # path('blog/',include('blog.urls', namespace='blog')),
     path('guide/', include('guide.urls', namespace='guide')),
     path('users/', include('users.urls', namespace='users')),
     ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
