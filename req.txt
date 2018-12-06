@@ -1,7 +1,9 @@
 Django==2.0.6
 django-bootstrap==0.2.4
 django-bootstrap4==0.0.6
+django-redis==4.10.0
 gunicorn==19.8.1
 Pillow==5.1.0
 PyMySQL==0.8.1
 pytz==2018.4
+redis==3.0.1
