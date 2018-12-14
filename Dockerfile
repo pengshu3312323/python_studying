@@ -11,7 +11,7 @@ ADD . /app
 RUN pip install --trusted-host pypi.python.org -r req.txt
 
 # Make port 80 available to the meetpencil outside this container
-EXPOSE 8000
+EXPOSE 8001
 
 # Define environment variable
 ENV NAME meetpencil
@@ -20,4 +20,4 @@ ENV NAME meetpencil
 
 
 # Run app.py when the container launches
-CMD ["gunicorn", "--bind=0.0.0.0:8000", "--workers=4", "--env", "DJANGO_SETTINGS_MODULE=meetpencil.settings", "meetpencil.wsgi"]
+CMD ["gunicorn", "--bind=0.0.0.0:8001", "--workers=4", "--env", "DJANGO_SETTINGS_MODULE=meetpencil.settings", "meetpencil.wsgi"]
