@@ -10,9 +10,13 @@
 	<div class="container">
 		<br>
 		<br>
-		<form method='POST' enctype="multipart/form-data">
-			{% csrf_token %}
+		<form action='/search/web/'>
 			<div class="form-row justify-content-md-center">
+				<select class="custom-select col-md-1 form-control-lg" id="inputGroupSelect01" name="search_target">
+					<option value="1">Baidu</option>
+					<option value="2">Google</option>
+					<option value="3">Bing</option>
+				</select>
 				<div class="col-md-6">
 					<input class="form-control form-control-lg" type="text" placeholder="Search" name="keywords">
 				</div>
@@ -20,7 +24,7 @@
 			<br>	
 			<div class="form-row justify-content-md-center">
 				<div class="col-md-2">
-					<button class="btn btn-light btn-primary btn-block" name="submit">Search</button>
+					<button class="btn btn-light btn-primary btn-block">Search</button>
 				</div>
 			</div>	
 		</form>
@@ -34,7 +38,7 @@
 		<ul class="nav">		
 			{% for favor in favorite %}
 				<li class="nav-link disabled">
-					<a class="nav-link text-dark" href ="{{favor.address}}">{{favor.name|title}}</a>
+					<a class="nav-link text-dark" href ="{{ favor.address }}">{{ favor.name|title }}</a>
 				</li>
 			{% endfor %}
 		</ul>		
