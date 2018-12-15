@@ -83,7 +83,7 @@ def add(request):
             # Check whether the user add the protocol or not
             address = 'http://' + address
 
-        new_site = Favorite.objects.create(name=name, address=address, owner__id=user_id)
+        new_site = Favorite.objects.create(name=name, address=address, owner=request.user)
         new_site.save()
         # 更新缓存
         # TODO 复用
