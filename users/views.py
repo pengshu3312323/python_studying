@@ -23,7 +23,7 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('guide:index'))
 
-    context ={'form': form, }
+    context = {'form': form, }
     return render(request, 'users/login.html', context)
 
 

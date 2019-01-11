@@ -14,4 +14,11 @@ class TimeBaseModel(models.Model):
 
 
 class SubUserAbstract(metaclass=ABCMeta):
-    pass
+    '''
+    子用户抽象基类
+    规定子用户方法
+    '''
+    @property
+    @abstractmethod
+    def to_dict(self):
+        pass
