@@ -12,3 +12,4 @@ meetpencil/settings.py
 log/
 *.swp
 manage.py
+trans.py
