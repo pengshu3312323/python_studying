@@ -13,12 +13,23 @@ class TimeBaseModel(models.Model):
         abstract = True
 
 
-class SubUserAbstract(metaclass=ABCMeta):
+class SubUserAbstractModel(models.Model):
     '''
     子用户抽象基类
     规定子用户方法
     '''
     @property
-    @abstractmethod
-    def to_dict(self):
+    def data(self):
         pass
+
+    class Meta:
+        abstract = True
+
+
+class UnsupportedException(Exception):
+    def __init__(self, type=None, value=None):
+        if type and value:
+            err = '{}: {} is unsupported'.format(type, value)
+        else:
+            err = 'Unsupported Error'
+        super().__init__(self, err)

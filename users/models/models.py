@@ -1,54 +1,36 @@
 from django.forms import model_to_dict
 from django.db import models
-from django.contrib.auth.models import User, UserManager
+from django.contrib.auth.models import User
 
-from .base import TimeBaseModel, SubUserAbstract
+from .base import TimeBaseModel, SubUserAbstractModel, UnsupportedException
 from .data import SEX, LOGIN_TYPE
-
-
-class UnsupportedException(Exception):
-    def __init__(self, type=None, value=None):
-        if type and value:
-            err = '{}: {} is unsupported'.format(type, value)
-        else:
-            err = 'Unsupported Error'
-        super().__init__(self, err)
-
-
-class SiteUserManager(models.Manager):
-    def create_user(self, login_type, **kwargs):
-        if login_type == 0:
-            user = self.create(login_type=login_type)
-            user.save()
-            AccountUser.objects.create_user(user, **kwargs)
-        else:
-            raise UnsupportedException('Login Type', login_type)
-        return user
 
 
 class SiteUser(models.Model):
     '''站点用户'''
     login_type = models.PositiveSmallIntegerField(choices=LOGIN_TYPE)
-
-    objects = SiteUserManager()
+    phone = models.CharField(max_length=32, blank=True)
 
     @property
-    def sub_user(self):
-        return self.sub_user
+    def data(self):
+        if self.login_type == 0:
+            # 账号密码登陆
+            sub_user_model = AccountUser
+        # elif self.login_type == 1:
+        else:
+            raise UnsupportedException('login type', self.login_type)
+
+        sub_user = sub_user_model.objects.get(
+            site_user=self
+        )
+        data = sub_user.data
+        data['id'] = self.id
+        data['login_type'] = self.login_type
+        data['phone'] = self.phone
+        return data
 
 
-class AccountUserManager(UserManager):
-    '''
-    '''
-    # FIXME
-    def create_user(self, site_user, **kwargs):
-        django_user = super().create_user(username, email=None, password=None, **extra_fields)
-        sub_user = self.model(site_user=site_user, django_user=django_user)
-        sub_user.save(using=self._db)
-        return sub_user
-
-
-class AccountUser(SubUserAbstract, User):
+class AccountUser(SubUserAbstractModel):
     '''
     通过账号密码登陆的用户
     中间表，连接SiteUser和Django的User
@@ -60,18 +42,20 @@ class AccountUser(SubUserAbstract, User):
     )
     django_user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    objects = AccountUserManager()
-
     @property
-    def to_dict(self):
-        data = model_to_dict(self, exclude=('password, '))
-        data['fullname'] = self.get_full_name()
+    def data(self):
+        data = model_to_dict(self.django_user, exclude=('password', 'id'))
+        data['fullname'] = self.django_user.get_full_name()
         return data
 
 
-class WeiboUser(SubUserAbstract):
+class WeiboUser(SubUserAbstractModel):
     pass
 
 
-class WechatUser(SubUserAbstract):
+class WechatUser(SubUserAbstractModel):
+    pass
+
+
+class PhoneUser(SubUserAbstractModel):
     pass
