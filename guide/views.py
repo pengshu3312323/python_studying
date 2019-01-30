@@ -12,6 +12,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 
+from users.handler import SiteUserSessionCtr
 from guide.models import Favorite
 from util.response import Response
 from util.cache import CustomCache
@@ -22,20 +23,26 @@ def index(request):
 
     context = {
         'favorite': None,
+        'username': None,
     }
 
-    if not request.user.is_authenticated:
+    if not SiteUserSessionCtr.login_check(request):
         return render(request, 'guide/index.html', context)
 
-    user_id = request.user.id
-    cache_key = 'favorites_{}'.format(user_id)
-    context = cache.get(cache_key)
+    user_id = request.session['user_id']
+    username = request.session['username']
 
-    if not context:
+    cache_key = 'favorites_{}'.format(user_id)
+    favorite_data = cache.get(cache_key)
+
+    if not favorite_data:
         favorites = Favorite.objects.filter(owner__id=user_id).order_by('time_added')
         favorite_data = [f.get_data() for f in favorites]
         context = {'favorite': favorite_data}
-        CustomCache.set(cache_key, context, 60 * 60 * 10)
+        CustomCache.set(cache_key, favorite_data, 60 * 60 * 10)
+
+    context['username'] = username
+    context['favorite'] = favorite_data
 
     if request.GET.get('json'):
         return Response.data(data=context)

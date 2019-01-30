@@ -4,8 +4,8 @@
 # Written by:Peng Shu
 
 from django.db import models
-from django.contrib.auth.models import User
 
+from users.models import SiteUser
 from .base import TimeBaseModel
 
 
@@ -13,7 +13,7 @@ class Favorite(TimeBaseModel):
     '''User's favorite web'''
     name = models.CharField(max_length=50, verbose_name='站点名称')
     address = models.TextField(verbose_name='站点地址')
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='用户')
+    owner = models.ForeignKey(SiteUser, on_delete=models.CASCADE, verbose_name='用户')
 
     def __str__(self):
         return self.name
