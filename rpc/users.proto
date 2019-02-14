@@ -1,0 +1,48 @@
+// users 模块
+
+syntax = "proto3";
+
+package users;
+
+message ResgisterLoginRequest {
+    int64 login_type = 1;
+    string username = 2;
+    string password = 3;
+}
+
+enum ResHint {
+    USERNAME_EXIST = 0;
+    INVALID_PHONE = 1;
+    WRONG_USERNAME_OR_PASSWORD = 2;
+    NO_THIS_USER = 3;
+    UNMATCH = 4;
+    WRONG_CAPTCHA = 5;
+}
+
+message UserDataResponse {
+    bool success = 1;
+    ResHint hint = 2;
+    int64 user_id = 3;
+    int64 login_type = 4;
+    string username = 5;
+    string email = 6;
+    string phone = 7;
+    string first_name = 8;
+    string last_name = 9;
+    string last_login = 10;
+    string date_joined = 11;
+    string fullname = 12;
+}
+
+message GetUserInfoRequest {
+    int64 user_id = 1;
+}
+
+service Users {
+    // 注册
+    rpc Register (ResgisterLoginRequest) returns (UserDataResponse) {}
+    // 登陆
+    rpc Login (ResgisterLoginRequest) returns (UserDataResponse) {}
+    // 查询
+    rpc GetUserInfo (GetUserInfoRequest) returns (UserDataResponse) {}
+}
