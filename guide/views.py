@@ -4,8 +4,6 @@
 # ----Written by Peng Shu
 ##########################################
 
-import random
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -66,7 +64,6 @@ def edit(request):
 
             ids = request.POST.getlist('favorite')  # Which you want to delete
             res = handler.delete_favorites(ids=ids)
-            print(res)
             return HttpResponseRedirect(reverse('guide:edit'))
 
 
