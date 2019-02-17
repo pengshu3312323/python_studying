@@ -67,6 +67,7 @@ class AccountUserFactory(AbstractUserFactory):
         user = authenticate(username=username, password=password)
         if user:
             site_user = SiteUser.objects.get(sub_user__django_user=user)
+            site_user.last_login_update()
             return True, site_user.data
         else:
             # 错误提示 HIND 2 用户名或密码不对

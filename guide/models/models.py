@@ -4,6 +4,7 @@
 # Written by:Peng Shu
 
 from django.db import models
+from django.forms import model_to_dict
 
 from users.models import SiteUser
 from .base import TimeBaseModel
@@ -17,6 +18,11 @@ class Favorite(TimeBaseModel):
 
     def __str__(self):
         return self.name
+
+    @property
+    def data(self):
+        data = model_to_dict(self)
+        return data
 
     def get_data(self):
         return {
