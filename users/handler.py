@@ -78,7 +78,7 @@ class SiteUserSessionCtr:
         @wraps(view_func)
         def check(request, *args, **kwargs):
             if request.session['is_login']:
-                return view_func(request, request, *args, **kwargs)
+                return view_func(request, *args, **kwargs)
             else:
                 return redirect(reverse('users:login'))
         return check

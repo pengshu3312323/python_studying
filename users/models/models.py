@@ -1,3 +1,5 @@
+import datetime
+
 from django.forms import model_to_dict
 from django.db import models
 from django.contrib.auth.models import User
@@ -10,9 +12,12 @@ class SiteUser(models.Model):
     '''站点用户'''
     login_type = models.PositiveSmallIntegerField(choices=LOGIN_TYPE)
     phone = models.CharField(max_length=32, blank=True)
+    ip = models.CharField(max_length=100, blank=True)
+    login_device = models.CharField(max_length=200, blank=True)
 
     @property
-    def data(self):
+    def sub_user(self):
+        # 获取 sub user 对象
         if self.login_type == 0:
             # 账号密码登陆
             sub_user_model = AccountUser
@@ -23,11 +28,27 @@ class SiteUser(models.Model):
         sub_user = sub_user_model.objects.get(
             site_user=self
         )
-        data = sub_user.data
-        data['id'] = self.id
-        data['login_type'] = self.login_type
-        data['phone'] = self.phone
+        return sub_user
+
+    @property
+    def data(self):
+        data = model_to_dict(self)
+        sub_user = self.sub_user
+        sub_user_data = sub_user.data
+        data.update(sub_user_data)
         return data
+
+    def last_login_update(self):
+        # 更新最近登陆
+        now = datetime.datetime.now()
+        if self.login_type == 0:
+            sub_user = self.sub_user
+            sub_user.django_user.last_login = now
+            sub_user.django_user.save()
+            sub_user.save()
+        else:
+            raise UnsupportedException('login type', self.login_type)
+        return 1
 
 
 class AccountUser(SubUserAbstractModel):

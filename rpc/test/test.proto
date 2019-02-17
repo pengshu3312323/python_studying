@@ -1,0 +1,19 @@
+// test grpc proto
+
+syntax = "proto3";
+
+package test;
+
+service Test {
+    rpc Echo (EchoRequest) returns (EchoResponse) {}
+}
+
+message EchoRequest {
+    string msg = 1;
+    int64 delay = 2;
+}
+
+message EchoResponse {
+    string msg = 1;
+    bool success = 2;
+}
