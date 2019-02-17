@@ -1,11 +1,11 @@
 #! /usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-import unittest
 import os
 import sys
 import asyncio
 
+import pytest
 import django
 
 BASE_DIR = os.path.dirname(os.path.dirname(__name__))
@@ -22,8 +22,8 @@ from users.handler import SiteUserHandler
 from guide.models import Favorite
 
 
-class TestUser(unittest.TestCase):
-    def setUp(self):
+class TestUser:
+    def setup(self):
         print('User test begin')
         self.username = 'testuser3'
         self.password = 'testpassword3'
@@ -43,7 +43,7 @@ class TestUser(unittest.TestCase):
             phone=self.phone
         )
         print(res)
-        self.assertTrue(res)
+        assert bool(res)
 
     def test_b_login(self):
         res = SiteUserHandler.login(
@@ -52,12 +52,12 @@ class TestUser(unittest.TestCase):
             password=self.password
         )
         print(res)
-        self.assertTrue(res)
+        assert bool(res)
 
     def test_d_logout(self):
         pass
 
-    def tearDown(self):
+    def teardown(self):
         print('User test finished')
 
 
@@ -119,8 +119,3 @@ class UserTrans:
         loop = asyncio.get_event_loop()
         loop.run_until_complete(asyncio.wait(tasks))
         loop.close()
-
-
-if __name__ == '__main__':
-    UserTrans.trans()
-    # UserTrans.single_test()
