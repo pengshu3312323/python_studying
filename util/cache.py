@@ -8,6 +8,12 @@ from django.core.cache import cache
 
 class CustomCache:
     @staticmethod
+    def get(key):
+        if not isinstance(key, str):
+            raise TypeError('Cache key must be string')
+        return cache.get(key)
+
+    @staticmethod
     def set(key, data, time):
         if not isinstance(key, str):
             raise TypeError('Cache key must be string')
@@ -19,3 +25,10 @@ class CustomCache:
         time = int(time * (10 + random.randint(0, 3)) / 10)
 
         return cache.set(key, data, time)
+
+    @staticmethod
+    def delete(key):
+        if not isinstance(key, str):
+            raise TypeError('Cache key must be string')
+
+        return cache.delete(key)
