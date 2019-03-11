@@ -2,7 +2,25 @@
 
 {% block header %}
 	<title>Guide</title>
-	
+	<style>
+		#favor
+        {
+            background: rgba(255, 255, 255, 0.3) !important; /* IE无效，FF有效 */
+            background: #fff;
+            filter: alpha(opacity=30);
+        }
+
+	</style>
+	<script language="javascript">
+		function normal(){ 
+			document.search.action="/search/web/";
+			document.search.submit();
+		}
+		function google(){
+			document.search.action="/search/google/";
+			document.search.submit();
+		}
+		</script>
 {% endblock header %}
 
 {% block content %}
@@ -10,7 +28,7 @@
 	<div class="container">
 		<br>
 		<br>
-		<form action='/search/web/'>
+		<form action='' name='search' method="GET">
 			<div class="form-row justify-content-md-center">
 				<select class="custom-select col-md-1 form-control-lg" id="inputGroupSelect01" name="search_target">
 					<option value="1">Baidu</option>
@@ -21,10 +39,13 @@
 					<input class="form-control form-control-lg" type="text" placeholder="Search" name="keywords">
 				</div>
 			</div>
-			<br>	
+			<br>
 			<div class="form-row justify-content-md-center">
 				<div class="col-md-2">
-					<button class="btn btn-light btn-primary btn-block">Search</button>
+					<button class="btn btn-light btn-primary btn-block" onclick="normal()">Search</button>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-info btn-block" onclick="google()">神秘搜索</button>
 				</div>
 			</div>	
 		</form>
@@ -32,22 +53,22 @@
 	</div>	
 	<br>
 	<br>
-	<br>
-	<br>
-	<div class="container">	
-		<ul class="nav">		
-			{% for favor in favorite %}
-				<li class="nav-link disabled">
-					<a class="nav-link text-dark" href ="{{ favor.address }}">{{ favor.name|title }}</a>
-				</li>
-			{% endfor %}
-		</ul>		
+	<div class="container" >	
+		<div class="rounded" id="favor">
+			<ul class="nav">		
+				{% for favor in favorite %}
+					<li class="nav-link disabled">
+						<a class="nav-link text-dark" href ="{{ favor.address }}">{{ favor.name|title }}</a>
+					</li>
+				{% endfor %}
+			</ul>		
+		</div>
 		<hr>
 		<ul class="nav">
 			{% if favorite %}
-				<a class="nav-link disabled" href="{% url 'guide:edit' %}">管理收藏</a>
+				<a class="nav-link disabled btn btn-light" href="{% url 'guide:edit' %}">管理收藏</a>
 			{% else %}
-				<a class="nav-link disabled" href="{% url 'guide:edit' %}">添加收藏</a>
+				<a class="nav-link disabled btn btn-light" href="{% url 'guide:edit' %}">添加收藏</a>
 			{% endif %}
 		</ul>
 	</div>
